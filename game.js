@@ -55,9 +55,11 @@ button2.addEventListener("click", (e) => {
     currentGameInstructionIndex =0; //sets the directions to the first item in the array
     updateInstruction();
     resetScore(); //calls the resetScore function to update the score to zero
+    
+    //start of button resets (text display, color display, visibility)
     let resetButton1 =document.getElementById('button1').style.display="inline-block";
-    let resetButton2 = document.getElementById('button2').textContent="Start Over";
-    let resetButton3 =document.getElementById('button3');
+    let resetButton2 = document.getElementById('button2').textContent="Start Over"; //from tutorial
+    let resetButton3 =document.getElementById('button3'); //shows next
     resetButton3.style.display="inline-block";
     let hideGameButton = document.getElementById('button4');
     hideGameButton.style.display="none";
@@ -65,7 +67,10 @@ button2.addEventListener("click", (e) => {
     hideTimerButton.style.display="none";
     let tutorialButton= document.getElementById('button2')
     tutorialButton.style.backgroundColor= "red";
-    
+    let classicButtonReset = document.getElementById('classic');
+    classicButtonReset.style.display="none";
+    let extremeButtonReset = document.getElementById('extreme');
+    extremeButtonReset.style.display="none";
 });
 
 /* ------ the next button ------ */
@@ -81,14 +86,47 @@ button3.addEventListener("click", (e) => {
     }
 });
 
+//select game mode --> classic mode
 button4.addEventListener("click", (e) => {
     e.preventDefault();
-    document.getElementById('button4').textContent= "Classic Mode";
     document.getElementById('button1').style.display="none";
     let tutorialButton= document.getElementById('button2');
     tutorialButton.textContent="Tutorial";
     tutorialButton.style.backgroundColor="purple";
+    document.getElementById('button4').style.display="none";
+    let classicButton = document.getElementById('classic');
+    classicButton.style.display="inline-block";
+    classicButton.style.backgroundColor= "blue";
+    let extremeButton =document.getElementById('extreme');
+    extremeButton.style.display="inline-block";
+    extremeButton.style.backgroundColor= "orange";
 });
+
+//classic game mode
+let classicTimerButton= document.getElementById('start-btn');
+classicTimerButton.style.display="none";
+
+classic.addEventListener("click", (e)=>{
+    document.getElementById('button2').style.display="none";
+    document.getElementById('extreme').style.display="none";
+    classicTimerButton.style.display="inline-block";
+    classicTimerButton.addEventListener('click', function(){
+        let timeDuration =30;
+        countdownClock(timeDuration);
+    });
+});
+function countdownClock(time){
+    let timer=setInterval(function(){
+        if (time == 0){
+            clearInterval(timer);
+            document.getElementById('timer').textContent= "Time's Up!";
+        } else {
+            time--;
+            document.getElementById('timer').textContent= "Time: " + time;
+        }
+    },1000);
+}
+
 
 
 
@@ -126,6 +164,10 @@ let draggedImage;
 function dragStart(event){
     event.dataTransfer.setData("text", event.target.id); //gives us the id of the dragged item
     draggedImage = event.target.id; 
+}
+
+function dragStartClassic(event){
+    event.dataTransfer.setData("text", "compost");
 }
 
 //used to help signify that the compost can be dragged here

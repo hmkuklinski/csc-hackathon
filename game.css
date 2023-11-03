@@ -134,7 +134,7 @@ body {
 
 
 /* ------ Button formatting ------ */
-#button1, #button2, #button3, #button4, #start-btn {
+#button1, #button2, #button3, #button4, #classic, #extreme, #start-btn {
     background-color:#003594;
     color:whitesmoke;
     font-size: 24px;
