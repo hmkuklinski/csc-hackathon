@@ -13,7 +13,13 @@ const text = document.querySelector("#text"); // text section under the game win
 const button1 = document.querySelector("#button1"); // for the previous button
 const button2 = document.querySelector("#button2"); //for the reset button- both text,score
 const button3 = document.querySelector("#button3"); //for the next button and Play Game
-
+const selectGameBtn = document.querySelector("#button4"); //select game mode
+const timerButton = document.querySelector("#start-btn");
+let tutorialButton= document.getElementById('button2');
+const classicButton = document.getElementById('classic');
+const extremeButton = document.getElementById('extreme');
+const timerText = document.getElementById('.timer');
+const scoreText= document.getElementById('.score');
 /* list of the game instructions!
  --> these will change once the user hits the previous/next buttons below the game window!
 */
@@ -34,8 +40,7 @@ let currentGameInstructionIndex = 0;
 /* function to change the text in the text section */
 function updateInstruction() {
     text.textContent= gameInstructions[currentGameInstructionIndex];
-    let hideTimerButton = document.getElementById('start-btn');
-    hideTimerButton.style.display="none";
+    timerButton.style.display="none";
 }
 updateInstruction();
 
@@ -57,20 +62,14 @@ button2.addEventListener("click", (e) => {
     resetScore(); //calls the resetScore function to update the score to zero
     
     //start of button resets (text display, color display, visibility)
-    let resetButton1 =document.getElementById('button1').style.display="inline-block";
-    let resetButton2 = document.getElementById('button2').textContent="Start Over"; //from tutorial
-    let resetButton3 =document.getElementById('button3'); //shows next
-    resetButton3.style.display="inline-block";
-    let hideGameButton = document.getElementById('button4');
-    hideGameButton.style.display="none";
-    let hideTimerButton = document.getElementById('start-btn');
-    hideTimerButton.style.display="none";
-    let tutorialButton= document.getElementById('button2')
+    button1.style.display="inline-block";
+    button2.textContent="Start Over"; //from tutorial back to start over
+    button3.style.display="inline-block";
+    selectGameBtn.style.display="none";
+    timerButton.style.display="none";
     tutorialButton.style.backgroundColor= "red";
-    let classicButtonReset = document.getElementById('classic');
-    classicButtonReset.style.display="none";
-    let extremeButtonReset = document.getElementById('extreme');
-    extremeButtonReset.style.display="none";
+    classicButton.style.display="none";
+    extremeButton.style.display="none";
     resetDraggedItems();
 });
 
@@ -82,37 +81,33 @@ button3.addEventListener("click", (e) => {
         updateInstruction();
     }
     else if (currentGameInstructionIndex == gameInstructions.length-1){
-        document.getElementById('button4').style.display= "inline-block"; //game mode
-        document.getElementById('button3').style.display="none";
+        button4.style.display= "inline-block"; //game mode
+        button3.style.display="none";
     }
 });
 
 //select game mode --> classic mode
 button4.addEventListener("click", (e) => {
     e.preventDefault();
-    document.getElementById('button1').style.display="none";
-    let tutorialButton= document.getElementById('button2');
+    button1.style.display="none";
     tutorialButton.textContent="Tutorial";
     tutorialButton.style.backgroundColor="purple";
-    document.getElementById('button4').style.display="none";
-    let classicButton = document.getElementById('classic');
+    button4.style.display="none";
     classicButton.style.display="inline-block";
     classicButton.style.backgroundColor= "blue";
-    let extremeButton =document.getElementById('extreme');
     extremeButton.style.display="inline-block";
     extremeButton.style.backgroundColor= "orange";
 });
 
 //classic game mode
-let classicTimerButton= document.getElementById('start-btn');
-classicTimerButton.style.display="none";
+timerButton.style.display="none";
 
 classic.addEventListener("click", (e)=>{
-    document.getElementById('button2').style.display="none";
-    document.getElementById('extreme').style.display="none";
-    document.getElementById('classic').style.display="none";
-    classicTimerButton.style.display="inline-block";
-    classicTimerButton.addEventListener('click', function(){
+    button2.style.display="none"; //hide reset after classic game mode selected
+    extremeButton.style.display="none"; //hide extreme option 
+    classicButton.style.display="none"; //classic mode already selected, no need for button to stay on screen...
+    timerButton.style.display="inline-block"; 
+    timerButton.addEventListener('click', function(){
         let timeDuration =30;
         timerButtonClicked(timeDuration);
     });
@@ -122,27 +117,27 @@ let numberOfTimersSet = 0;
 function countdownClock(time){
     let timer=setInterval(function(){
         if (time == 0){
-            clearInterval(timer);
-            timerCompleted();
-            addToScoreList(score);
-            resetScore();
+            clearInterval(timer); //resets timer
+            timerCompleted(); //resets boolean value
+            addToScoreList(score); //adds score to scoreboard
+            resetScore(); 
 
-            document.getElementById('timer').textContent= "Time's Up!";
-            document.getElementById('score').textContent= "Scoreboard: " +scoreList;
-            document.getElementById('text').textContent= "Nice try. Think you can do better? Try Again!";
-            document.getElementById('start-btn').textContent = "Restart Timer";
+            timerText.textContent= "Time's Up!";
+            scoreText.textContent= "Scoreboard: " +scoreList;
+            timerText.textContent= "Nice try. Think you can do better? Try Again!";
+            timerButton.textContent = "Restart Timer";
         } else {
             time--;
-            document.getElementById('timer').textContent= "Time: " + time;
-            document.getElementById('text').textContent= "Hurry! As fast as you can!"
+            timerText.textContent= "Time: " + time;
+            timerText.textContent= "Hurry! As fast as you can!"
             if (time<=10 && time>5){
-                document.getElementById('text').textContent="Less than 10 Seconds!";
+                timerText.textContent="Less than 10 Seconds!";
             }
             else if (time<=5){
-                document.getElementById('text').textContent= "Time is almost up!!"
+                timerText.textContent= "Time is almost up!!"
             }
             else if (time<=15 &&time>10){
-                document.getElementById('text').textContent= "Halfway there!"
+                timerText.textContent= "Halfway there!"
             }
         }
     },1000);
@@ -166,14 +161,12 @@ function timerCompleted() {
 let score=0;
 function addPoint (points){
     score += points; //updates the score
-    const scoreElem = document.getElementById("score"); //finds html element that has id score
-    scoreElem.textContent= "Score: " + score; //changes the text to
+    scoreText.textContent= "Score: " + score; //changes the text to
 }
 
 function resetScore(points){
     score =0;
-    let scoreElem = document.getElementById("score"); //see notes above in function addPoint()
-    scoreElem.textContent = "Score: " + score;
+    scoreText.textContent = "Score: " + score;
 }
 let scoreList= [] //keeps track of past scores
 function addToScoreList (score){
@@ -239,11 +232,11 @@ function drop(event){
         const compostItem = document.getElementById(draggedImage);
         compostItem.style.display = "none";
     }
-    draggedItemsCount++;
+    draggedItemsCount++; //adds to counter for the number of dragged items
     if (draggedItemsCount%4 == 0){
         resetDraggedItems();
     }
-    if (timerAlreadySet){
+    if (timerAlreadySet){ //don't want to give them free points before they start!
         addPoint(1);
     }
     else {
