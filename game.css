@@ -85,7 +85,10 @@ body {
 
 .trashcan:hover {
     content: url("https://media.discordapp.net/attachments/812752321867153409/1169735326739202108/trashcan_opened_2_1.png?ex=65567bea&is=654406ea&hm=94f934914e099182429fb77ac9820d33e418c5aab604fe1fab0fb6a8531f6af1");
-    transition: top ease-in 0.8s;
+    position:absolute;
+    top: 34%;
+    left: 16%;
+    z-index: 2;
 }
 
 /*positioning for the image divs relative to the game window*/
