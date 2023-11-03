@@ -145,6 +145,9 @@ body {
     margin: 20px 10px;
     text-decoration:none;
 }
+#button2 {
+    background-color: red;
+}
 
 #button4 {
     background-color:darkgreen;

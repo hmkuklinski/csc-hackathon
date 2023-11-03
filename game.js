@@ -63,6 +63,8 @@ button2.addEventListener("click", (e) => {
     hideGameButton.style.display="none";
     let hideTimerButton = document.getElementById('start-btn');
     hideTimerButton.style.display="none";
+    let tutorialButton= document.getElementById('button2')
+    tutorialButton.style.backgroundColor= "red";
     
 });
 
@@ -81,8 +83,11 @@ button3.addEventListener("click", (e) => {
 
 button4.addEventListener("click", (e) => {
     e.preventDefault();
+    document.getElementById('button4').textContent= "Classic Mode";
     document.getElementById('button1').style.display="none";
-    document.getElementById('button2').textContent="Tutorial";
+    let tutorialButton= document.getElementById('button2');
+    tutorialButton.textContent="Tutorial";
+    tutorialButton.style.backgroundColor="purple";
 });
 
 
