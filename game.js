@@ -13,7 +13,7 @@ const text = document.querySelector("#text"); // text section under the game win
 const button1 = document.querySelector("#button1"); // for the previous button
 const button2 = document.querySelector("#button2"); //for the reset button- both text,score
 const button3 = document.querySelector("#button3"); //for the next button and Play Game
-const timerButton = document.querySelector("#start-btn"); //for the timer button
+
 /* list of the game instructions!
  --> these will change once the user hits the previous/next buttons below the game window!
 */
@@ -34,7 +34,8 @@ let currentGameInstructionIndex = 0;
 /* function to change the text in the text section */
 function updateInstruction() {
     text.textContent= gameInstructions[currentGameInstructionIndex];
-    timerButton.style.display="none";
+    let hideTimerButton = document.getElementById('start-btn');
+    hideTimerButton.style.display="none";
 }
 updateInstruction();
 
@@ -62,7 +63,8 @@ button2.addEventListener("click", (e) => {
     resetButton3.style.display="inline-block";
     let hideGameButton = document.getElementById('button4');
     hideGameButton.style.display="none";
-    timerButton.style.display="none";
+    let hideTimerButton = document.getElementById('start-btn');
+    hideTimerButton.style.display="none";
     let tutorialButton= document.getElementById('button2')
     tutorialButton.style.backgroundColor= "red";
     let classicButtonReset = document.getElementById('classic');
@@ -102,15 +104,15 @@ button4.addEventListener("click", (e) => {
 });
 
 //classic game mode
-
-timerButton.style.display="none";
+let classicTimerButton= document.getElementById('start-btn');
+classicTimerButton.style.display="none";
 
 classic.addEventListener("click", (e)=>{
     document.getElementById('button2').style.display="none";
     document.getElementById('extreme').style.display="none";
     document.getElementById('classic').style.display="none";
-    timerButton.style.display="inline-block";
-    timerButton.addEventListener('click', function(){
+    classicTimerButton.style.display="inline-block";
+    classicTimerButton.addEventListener('click', function(){
         let timeDuration =30;
         timerButtonClicked(timeDuration);
     });
@@ -120,10 +122,10 @@ let numberOfTimersSet = 0;
 function countdownClock(time){
     let timer=setInterval(function(){
         if (time == 0){
-            clearInterval(timer);
-            timerCompleted();
-            addToScoreList(score);
-            resetScore();
+            clearInterval(timer); //resets timer
+            timerCompleted(); //resets boolean value
+            addToScoreList(score); //adds score to scoreboard
+            resetScore(); 
 
             document.getElementById('timer').textContent= "Time's Up!";
             document.getElementById('score').textContent= "Scoreboard: " +scoreList;
