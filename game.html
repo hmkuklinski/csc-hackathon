@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--metadata-->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--CSS sheet/other required website imports-->
+    <link rel="stylesheet" href="game.css">
+    <script defer src=""></script>
+    <title>Pitt CSC Hacks Project- drag game</title>
+  </head>
+  <body>
+    <div class="webpage-elements">
+        <div class="top-text">
+            <div class="title">
+                <h1>Tutorial</h1>
+            </div>
+            <div class="subtitle">
+                <h2>Help Benji the Bunny gather composting materials</h2>
+            </div>
+        </div>
+
+        <div class="game-window">
+            <div class="stats">
+                <div id="score">Score: 0</div>
+                <div id="timer">Time: 30</div>
+            </div>
+            <div class="bunny">
+                <img src="https://media.discordapp.net/attachments/812752321867153409/1169396497931059210/bunny_1.png?ex=6555405b&is=6542cb5b&hm=90c5813b4b92a639ab859acc76316557a3d78ea362f1dcd242c1b25a4685fa67" alt="main bunny" class="bunny">
+            </div>
+            <div class="trashcan">
+                <img src="https://media.discordapp.net/attachments/812752321867153409/1169735327020236901/trashcan_closed_1_1.png?ex=65567bea&is=654406ea&hm=44aeb891b5124ca8d53997c344c2fc80eb861469692ebbab234373e8d30062a7" alt="trashcan" class="trashcan" id="trashcan-closed">
+            </div>
+            <div class="banana-peel">
+                <img src="https://freepngimg.com/thumb/banana/130822-banana-peel-hq-image-free.png" alt="banana peel" class="compost" id="banana-peel" draggable>
+            </div>
+            <div class="apple-core">
+                <img src="https://media.discordapp.net/attachments/812752321867153409/1168991984640348180/apple_core_1.png?ex=6553c79f&is=6541529f&hm=c256fdea53f0f08be4eca9bab2c162e234812587b757b435a5ecccc83c874f77" alt="apple core" class="compost" id="apple-core"draggable>
+            </div>
+            <div class="grass-clippings">
+                <img src="https://media.discordapp.net/attachments/812752321867153409/1168997478549434458/grass_clippings.png?ex=6553ccbd&is=654157bd&hm=e687c0fd7eb157da38c0ddc07a625537c16b5434b9ffba244eb638cf96915c7a" alt="grass clippings" class="compost" id="grass" draggable>
+            </div>
+            <div class="rotten-food">
+                <img src="https://media.discordapp.net/attachments/812752321867153409/1168999232812879973/rotten_food.png?ex=6553ce60&is=65415960&hm=41101e3b1cdfba1a5a38f37d35404dd91e010ef0c1d7baa38cab89633d7edaf2" alt="rotten food" class="compost" id="rotten" draggable>
+            </div>
+
+        </div>
+        <div id="instruction-container">
+            <div id="text">
+                <p>This is the background information box.</p>
+            </div>
+        </div>
+        <div class="game-buttons">
+            <button id="button1" href=""> Previous</button>
+            <button id="button2" href=""> Reset</button>
+            <button id="button3" href=""> Next</button>
+            <button id="start-btn">Start Timer</button>
+        </div>
+    </div>
+    <script  src="game.js"></script>
+  </body>
+</html>
