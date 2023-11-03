@@ -129,7 +129,7 @@ body {
 }
 
 .game-buttons{
-    display:block;
+    display:inline-block;
 }
 
 
@@ -144,6 +144,10 @@ body {
     display:inline-block;
     margin: 20px 10px;
     text-decoration:none;
+}
+
+#button4 {
+    background-color:darkgreen;
 }
 
 #button1:hover, #button2:hover, #button3:hover {

@@ -34,6 +34,8 @@ let currentGameInstructionIndex = 0;
 /* function to change the text in the text section */
 function updateInstruction() {
     text.textContent= gameInstructions[currentGameInstructionIndex];
+    let hideTimerButton = document.getElementById('start-btn');
+    hideTimerButton.style.display="none";
 }
 updateInstruction();
 
@@ -53,8 +55,14 @@ button2.addEventListener("click", (e) => {
     currentGameInstructionIndex =0; //sets the directions to the first item in the array
     updateInstruction();
     resetScore(); //calls the resetScore function to update the score to zero
-    document.getElementById('button3').style.display="block";
-    button3.innerHTML = "Next";
+    let resetButton1 =document.getElementById('button1').style.display="inline-block";
+    let resetButton2 = document.getElementById('button2').textContent="Start Over";
+    let resetButton3 =document.getElementById('button3');
+    resetButton3.style.display="inline-block";
+    let hideGameButton = document.getElementById('button4');
+    hideGameButton.style.display="none";
+    let hideTimerButton = document.getElementById('start-btn');
+    hideTimerButton.style.display="none";
     
 });
 
@@ -66,9 +74,15 @@ button3.addEventListener("click", (e) => {
         updateInstruction();
     }
     else if (currentGameInstructionIndex == gameInstructions.length-1){
-        document.getElementById('button4').style.display= "block";
+        document.getElementById('button4').style.display= "inline-block"; //game mode
         document.getElementById('button3').style.display="none";
     }
+});
+
+button4.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.getElementById('button1').style.display="none";
+    document.getElementById('button2').textContent="Tutorial";
 });
 
 
