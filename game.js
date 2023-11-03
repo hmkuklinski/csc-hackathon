@@ -53,6 +53,7 @@ button2.addEventListener("click", (e) => {
     currentGameInstructionIndex =0; //sets the directions to the first item in the array
     updateInstruction();
     resetScore(); //calls the resetScore function to update the score to zero
+    document.getElementById('button3').style.display="block";
     button3.innerHTML = "Next";
     
 });
@@ -66,6 +67,7 @@ button3.addEventListener("click", (e) => {
     }
     else if (currentGameInstructionIndex == gameInstructions.length-1){
         document.getElementById('button4').style.display= "block";
+        document.getElementById('button3').style.display="none";
     }
 });
 
