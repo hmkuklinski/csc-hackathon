@@ -65,9 +65,11 @@ button3.addEventListener("click", (e) => {
         updateInstruction();
     }
     else if (currentGameInstructionIndex == gameInstructions.length-1){
-        button3.innerHTML = "Play Game"; //want button to change the innerText to allow for new button function for playGame
+        document.getElementById('button4').style.display= "block";
     }
 });
+
+
 
 /* ------ for the score! ------ */
 let score=0;
