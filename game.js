@@ -111,11 +111,14 @@ classic.addEventListener("click", (e)=>{
     document.getElementById('button2').style.display="none";
     document.getElementById('extreme').style.display="none";
     document.getElementById('classic').style.display="none";
+   
     classicTimerButton.style.display="inline-block";
     classicTimerButton.addEventListener('click', function(){
         let timeDuration =30;
         timerButtonClicked(timeDuration);
+       
     });
+    
 });
 //the timer function
 let numberOfTimersSet = 0;
@@ -126,11 +129,14 @@ function countdownClock(time){
             timerCompleted(); //resets boolean value
             addToScoreList(score); //adds score to scoreboard
             resetScore(); 
+            resetDraggedItems();
 
+            document.getElementById('score').textContent= "Scoreboard: " +scoreList[numberOfTimersSet];
             document.getElementById('timer').textContent= "Time's Up!";
-            document.getElementById('score').textContent= "Scoreboard: " +scoreList;
             document.getElementById('text').textContent= "Nice try. Think you can do better? Try Again!";
             document.getElementById('start-btn').textContent = "Restart Timer";
+            numberOfTimersSet++;
+            
         } else {
             time--;
             document.getElementById('timer').textContent= "Time: " + time;
@@ -164,6 +170,7 @@ function timerCompleted() {
 
 /* ------ for the score! ------ */
 let score=0;
+let scoreList= [] //keeps track of past scores
 function addPoint (points){
     score += points; //updates the score
     const scoreElem = document.getElementById("score"); //finds html element that has id score
@@ -171,11 +178,10 @@ function addPoint (points){
 }
 
 function resetScore(points){
-    score =0;
+    score=0;
     let scoreElem = document.getElementById("score"); //see notes above in function addPoint()
     scoreElem.textContent = "Score: " + score;
 }
-let scoreList= [] //keeps track of past scores
 function addToScoreList (score){
     scoreList.push(score);
 }
@@ -260,6 +266,7 @@ function resetDraggedItems() {
     }
 }
 
+/*
 function randomizeDroppedItems() {
     //first need to create an array list to select our compost elements
     let compostableItemsList = [];
@@ -278,5 +285,6 @@ function randomizeDroppedItems() {
         document.getElementById(randomSelection).style.display= "none"; //disappears after 2 seconds
         randomizeDroppedItems(); //select a new random item
     },2000);
-    randomizeDroppedItems();
+   // randomizeDroppedItems();
 }
+*/
