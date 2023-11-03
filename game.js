@@ -110,24 +110,55 @@ classicTimerButton.style.display="none";
 classic.addEventListener("click", (e)=>{
     document.getElementById('button2').style.display="none";
     document.getElementById('extreme').style.display="none";
+    document.getElementById('classic').style.display="none";
     classicTimerButton.style.display="inline-block";
     classicTimerButton.addEventListener('click', function(){
         let timeDuration =30;
-        countdownClock(timeDuration);
+        timerButtonClicked(timeDuration);
     });
 });
+//the timer function
+let numberOfTimersSet = 0;
 function countdownClock(time){
     let timer=setInterval(function(){
         if (time == 0){
             clearInterval(timer);
+            timerCompleted();
+            addToScoreList(score);
+            resetScore();
+
             document.getElementById('timer').textContent= "Time's Up!";
+            document.getElementById('score').textContent= "Scoreboard: " +scoreList;
+            document.getElementById('text').textContent= "Nice try. Think you can do better? Try Again!";
+            document.getElementById('start-btn').textContent = "Restart Timer";
         } else {
             time--;
             document.getElementById('timer').textContent= "Time: " + time;
+            document.getElementById('text').textContent= "Hurry! As fast as you can!"
+            if (time<=10 && time>5){
+                document.getElementById('text').textContent="Less than 10 Seconds!";
+            }
+            else if (time<=5){
+                document.getElementById('text').textContent= "Time is almost up!!"
+            }
+            else if (time<=15 &&time>10){
+                document.getElementById('text').textContent= "Halfway there!"
+            }
         }
     },1000);
-}
+};
 
+//function to see if button is already pressed- prevents creation of another countdown
+let timerAlreadySet = false;
+function timerButtonClicked(time) {
+    if (!timerAlreadySet){
+        countdownClock(time);
+        timerAlreadySet = true;
+    }
+}
+function timerCompleted() {
+    timerAlreadySet= false;
+}
 
 
 
@@ -144,9 +175,10 @@ function resetScore(points){
     let scoreElem = document.getElementById("score"); //see notes above in function addPoint()
     scoreElem.textContent = "Score: " + score;
 }
-
-//TODO: will need to add a reset Time option!!
-//TODO: will need to create a redirect for the playGame option
+let scoreList= [] //keeps track of past scores
+function addToScoreList (score){
+    scoreList.push(score);
+}
 
 /* ------ for the compostable items!! ------ */
 
@@ -179,6 +211,7 @@ function dragOver(event){
     event.preventDefault(); //prevents it from extracting the URL of image
 }
 
+let draggedItemsCount = 0;
 function drop(event){
     event.preventDefault(); //prevents it from trying to navigate to the URL of image
     const info = event.dataTransfer.getData("text"); 
@@ -206,8 +239,16 @@ function drop(event){
         const compostItem = document.getElementById(draggedImage);
         compostItem.style.display = "none";
     }
-    
-    addPoint(1);
+    draggedItemsCount++;
+    if (draggedItemsCount%4 == 0){
+        resetDraggedItems();
+    }
+    if (timerAlreadySet){
+        addPoint(1);
+    }
+    else {
+        text.textContent= "The score won't change until you start the timer!";
+    }
     event.target.classList.remove("trashcan-hover") //after release, the picture will become normal class .trashcan (closed compost bin)
 }
 
@@ -217,4 +258,25 @@ function resetDraggedItems() {
     for (let i=0;i<compostItems.length;i++){
         compostItems[i].style.display="block";
     }
+}
+
+function randomizeDroppedItems() {
+    //first need to create an array list to select our compost elements
+    let compostableItemsList = [];
+    let divs = document.getElementsByTagName('div'); //will select all the div elements on the page
+
+    for (let i=0;i<divs.length;i++){
+        if(divs[i].className=="compost"){
+            compostableItemsList.push(divs[i]); //if div class is compost, will add item to list
+        }
+    }
+    let randomIndex = Math.floor(Math.random()*compostableItemsList.length); //selects a random index (normally would add one to index value, but length satisfies conditions)
+    let randomSelection = compostableItemsList[randomIndex];
+    let changeDisplay = document.getElementsById(randomSelection);
+    changeDisplay.style.display= "block";
+    setTimeout(function(){
+        document.getElementById(randomSelection).style.display= "none"; //disappears after 2 seconds
+        randomizeDroppedItems(); //select a new random item
+    },2000);
+    randomizeDroppedItems();
 }
