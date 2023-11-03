@@ -71,6 +71,7 @@ button2.addEventListener("click", (e) => {
     classicButtonReset.style.display="none";
     let extremeButtonReset = document.getElementById('extreme');
     extremeButtonReset.style.display="none";
+    resetDraggedItems();
 });
 
 /* ------ the next button ------ */
@@ -210,3 +211,10 @@ function drop(event){
     event.target.classList.remove("trashcan-hover") //after release, the picture will become normal class .trashcan (closed compost bin)
 }
 
+function resetDraggedItems() {
+    const compostItems = document.getElementsByClassName("compost");
+
+    for (let i=0;i<compostItems.length;i++){
+        compostItems[i].style.display="block";
+    }
+}
