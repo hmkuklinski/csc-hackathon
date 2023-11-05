@@ -1,11 +1,5 @@
 const compostItems = document.querySelectorAll('.compost');
 
-//may need these for the actual game mode
-const compostBanana = document.querySelector('.banana-peel');
-const compostApple = document.querySelector('.apple-core');
-const compostGrass = document.querySelector('.grass-clippings');
-const compostRotten = document.querySelector('.rotten-food');
-
 const trashcan = document.querySelector('.trashcan');
 const bunny= document.querySelector('.bunny');
 
@@ -13,6 +7,10 @@ const text = document.querySelector("#text"); // text section under the game win
 const button1 = document.querySelector("#button1"); // for the previous button
 const button2 = document.querySelector("#button2"); //for the reset button- both text,score
 const button3 = document.querySelector("#button3"); //for the next button and Play Game
+const button4= document.querySelector("#button4"); //game menu
+const classic = document.getElementById('classic');
+const extreme= document.getElementById('extreme');
+const startButton = document.querySelector("#start-btn");
 
 /* list of the game instructions!
  --> these will change once the user hits the previous/next buttons below the game window!
@@ -33,9 +31,8 @@ let currentGameInstructionIndex = 0;
 
 /* function to change the text in the text section */
 function updateInstruction() {
-    text.textContent= gameInstructions[currentGameInstructionIndex];
-    let hideTimerButton = document.getElementById('start-btn');
-    hideTimerButton.style.display="none";
+    text.textContent= gameInstructions[currentGameInstructionIndex]; //displays the instructions in textbox below game-window
+    startButton.style.display="none"; //don't need to display the timer button
 }
 updateInstruction();
 
@@ -46,7 +43,7 @@ button1.addEventListener("click", (e) => {
         currentGameInstructionIndex --;
         updateInstruction();
     }
-    button3.innerHTML = "Next"; //need to reset the button3 text if the user reaches the end of the instructions and wants to go back so that it doesn't say play game
+    button3.textContent = "Next"; //need to reset the button3 text if the user reaches the end of the instructions and wants to go back so that it doesn't say play game
 });
 
 /* ------ for our reset button  ------ */
@@ -56,21 +53,21 @@ button2.addEventListener("click", (e) => {
     updateInstruction();
     resetScore(); //calls the resetScore function to update the score to zero
     
-    //start of button resets (text display, color display, visibility)
-    let resetButton1 =document.getElementById('button1').style.display="inline-block";
-    let resetButton2 = document.getElementById('button2').textContent="Start Over"; //from tutorial
-    let resetButton3 =document.getElementById('button3'); //shows next
-    resetButton3.style.display="inline-block";
-    let hideGameButton = document.getElementById('button4');
-    hideGameButton.style.display="none";
-    let hideTimerButton = document.getElementById('start-btn');
-    hideTimerButton.style.display="none";
-    let tutorialButton= document.getElementById('button2')
-    tutorialButton.style.backgroundColor= "red";
-    let classicButtonReset = document.getElementById('classic');
-    classicButtonReset.style.display="none";
-    let extremeButtonReset = document.getElementById('extreme');
-    extremeButtonReset.style.display="none";
+    //what buttons do we want displayed when we hit the reset button (for directions)
+    button1.style.display="inline-block";
+    button3.style.display="inline-block";
+    button4.style.display="none";
+    startButton.style.display="none";
+    classic.style.display="none";
+    extreme.style.display="none";
+    
+    //in button4, we change the start over button to the tutorial button option, since it goes to beginning of directions and resets everything
+    //need to reset the button from displaying tutorial (with a color of purple) to the original text
+    button2.textContent="Start Over"; 
+    button2.style.backgroundColor= "red";
+
+    //in classic and extreme modes, we set the game4 button to "return to game menu", but want "select game menu" on reset
+    button4.textContent="Select Game Mode";
     resetDraggedItems();
 });
 
@@ -87,56 +84,86 @@ button3.addEventListener("click", (e) => {
     }
 });
 
-//select game mode --> classic mode
+//select game mode --> tutorial, classic mode, expert mode
 button4.addEventListener("click", (e) => {
     e.preventDefault();
-    document.getElementById('button1').style.display="none";
-    let tutorialButton= document.getElementById('button2');
-    tutorialButton.textContent="Tutorial";
-    tutorialButton.style.backgroundColor="purple";
-    document.getElementById('button4').style.display="none";
-    let classicButton = document.getElementById('classic');
-    classicButton.style.display="inline-block";
-    classicButton.style.backgroundColor= "blue";
-    let extremeButton =document.getElementById('extreme');
-    extremeButton.style.display="inline-block";
-    extremeButton.style.backgroundColor= "orange";
+    button1.style.display="none";
+    button2.textContent="Tutorial"; //the reset button doubles as tutorial- goes back to first instructions and resets compost items
+    button2.style.backgroundColor="purple"; 
+    button4.style.display="none"; //already hit selected game menu button and we are in the menu, don't need the button anymore
+    classic.style.display="inline-block";
+    classic.style.backgroundColor= "blue";
+    extreme.style.display="inline-block";
+    extreme.style.backgroundColor= "orange";
 });
 
 //classic game mode
-let classicTimerButton= document.getElementById('start-btn');
-classicTimerButton.style.display="none";
-
+startButton.style.display="none";
+let extremeModeSelected= false;
+let classicModeSelected=false;
 classic.addEventListener("click", (e)=>{
-    document.getElementById('button2').style.display="none";
-    document.getElementById('extreme').style.display="none";
-    document.getElementById('classic').style.display="none";
+    classicModeSelected =true;
+    button2.style.display="none";
+    extreme.style.display="none";
+    classic.style.display="none";
+    button4.style.display="inline-block"; //will allow user to go back to select game option
+    button4.textContent= "Return to Game Menu";
    
-    classicTimerButton.style.display="inline-block";
-    classicTimerButton.addEventListener('click', function(){
+    startButton.style.display="inline-block";
+    startButton.addEventListener('click', function(){
+        startButton.textContent= "Game In Progress";
+        button4.style.display="none";
         let timeDuration =30;
         timerButtonClicked(timeDuration);
-       
-    });
-    
+    });  
+});
+
+extreme.addEventListener("click", (e) =>{
+    extremeModeSelected= true;
+    button2.style.display="none";
+    extreme.style.display="none";
+    classic.style.display="none";
+    button4.style.display="inline-block"; //will allow user to go back to select game option
+    button4.textContent= "Return to Game Menu";
+
+    startButton.style.display="inline-block";
+    startButton.addEventListener('click', function(){
+        startButton.textContent= "Game In Progress";
+        button4.style.display="none";
+        let timeDuration =30;
+        timerButtonClicked(timeDuration);
+    });  
+
 });
 //the timer function
 let numberOfTimersSet = 0;
+let extremeRandom;
+let randomizeTimer;
 function countdownClock(time){
     let timer=setInterval(function(){
         if (time == 0){
             clearInterval(timer); //resets timer
+            clearInterval(extremeRandom);
             timerCompleted(); //resets boolean value
-            addToScoreList(score); //adds score to scoreboard
-            resetScore(); 
+            //addToScoreList(score); //adds score to scoreboard 
             resetDraggedItems();
-
-            document.getElementById('score').textContent= "Scoreboard: " +scoreList[numberOfTimersSet];
+            document.getElementById('score').textContent= "Scoreboard: " +score;
             document.getElementById('timer').textContent= "Time's Up!";
             document.getElementById('text').textContent= "Nice try. Think you can do better? Try Again!";
-            document.getElementById('start-btn').textContent = "Restart Timer";
-            numberOfTimersSet++;
-            
+            button2.style.display="inline-block";
+            button2.textContent="New Player";
+            startButton.textContent="New Game";
+            startButton.addEventListener('click', function(){
+                resetScore(0);
+                numberOfTimersSet++;
+                startButton.textContent= "Game In Progress";
+                button4.style.display="none";
+                let timeDuration =30;
+                timerButtonClicked(timeDuration);
+            });
+            button2.addEventListener("click", (e) =>{
+                resetScore(0);
+            })
         } else {
             time--;
             document.getElementById('timer').textContent= "Time: " + time;
@@ -152,6 +179,13 @@ function countdownClock(time){
             }
         }
     },1000);
+
+    //for extreme mode
+    extremeRandom = setInterval(function(){
+        if (extremeModeSelected){
+            randomizeDroppedItems();
+        }
+    },3000);
 };
 
 //function to see if button is already pressed- prevents creation of another countdown
@@ -162,6 +196,8 @@ function timerButtonClicked(time) {
         timerAlreadySet = true;
     }
 }
+
+//resets the boolean value- allows us to start another timer
 function timerCompleted() {
     timerAlreadySet= false;
 }
@@ -178,7 +214,7 @@ function addPoint (points){
 }
 
 function resetScore(points){
-    score=0;
+    score= points;
     let scoreElem = document.getElementById("score"); //see notes above in function addPoint()
     scoreElem.textContent = "Score: " + score;
 }
@@ -205,10 +241,6 @@ function dragStart(event){
     draggedImage = event.target.id; 
 }
 
-function dragStartClassic(event){
-    event.dataTransfer.setData("text", "compost");
-}
-
 //used to help signify that the compost can be dragged here
 function dragEnter(event){
     event.target.classList.add("trashcan-hover") //when we hover, it adds the class trashcan hover (changes our image to lid off)
@@ -221,11 +253,6 @@ let draggedItemsCount = 0;
 function drop(event){
     event.preventDefault(); //prevents it from trying to navigate to the URL of image
     const info = event.dataTransfer.getData("text"); 
-
-    if (info == "compost") {
-        const compostItem = document.getElementById(draggedImage);
-        compostItem.style.display = "none";
-    }
 
     // ------ This is code to eliminate them one by one ------
 
@@ -246,13 +273,16 @@ function drop(event){
         compostItem.style.display = "none";
     }
     draggedItemsCount++;
-    if (draggedItemsCount%4 == 0){
-        resetDraggedItems();
+    if (classicModeSelected){
+        if (draggedItemsCount%4 == 0 ){ //when all four items are dragged, will reset images
+            resetDraggedItems();
+        }
     }
+    
     if (timerAlreadySet){
         addPoint(1);
     }
-    else {
+    else { //failsafe for cheaters who try to earn extra points before the timer is started
         text.textContent= "The score won't change until you start the timer!";
     }
     event.target.classList.remove("trashcan-hover") //after release, the picture will become normal class .trashcan (closed compost bin)
@@ -266,25 +296,18 @@ function resetDraggedItems() {
     }
 }
 
-/*
 function randomizeDroppedItems() {
     //first need to create an array list to select our compost elements
-    let compostableItemsList = [];
-    let divs = document.getElementsByTagName('div'); //will select all the div elements on the page
-
-    for (let i=0;i<divs.length;i++){
-        if(divs[i].className=="compost"){
-            compostableItemsList.push(divs[i]); //if div class is compost, will add item to list
-        }
-    }
+    let compostableItemsList = ["grass", "rotten","apple-core", "banana-peel"]; //HTML IDs needed
     let randomIndex = Math.floor(Math.random()*compostableItemsList.length); //selects a random index (normally would add one to index value, but length satisfies conditions)
     let randomSelection = compostableItemsList[randomIndex];
-    let changeDisplay = document.getElementsById(randomSelection);
-    changeDisplay.style.display= "block";
-    setTimeout(function(){
+    let changeDisplay = document.getElementById(randomSelection);
+    
+    const xPos = Math.random() * 65; // Adjust the value as needed
+    changeDisplay.style.transform = `translateX(${xPos}px)`;
+    changeDisplay.style.display = "block";
+    
+    randomizeTimer= setTimeout(function(){
         document.getElementById(randomSelection).style.display= "none"; //disappears after 2 seconds
-        randomizeDroppedItems(); //select a new random item
     },2000);
-   // randomizeDroppedItems();
 }
-*/
