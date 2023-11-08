@@ -1,9 +1,11 @@
 body {
     display:flex;
-    align-items:center;
+    /*align-items:center;*/
     height: 100vh;
-    justify-content:center;
+   /* justify-content:center;*/
     flex-direction:column;
+    font-family: 'papyrus';
+    
 }
 
 .webpage-elements {
@@ -23,7 +25,7 @@ body {
     text-align:center;
 }
 .title {
-    margin-top: 20px;
+    font:bold;
 }
 
 .game-window{
@@ -135,6 +137,16 @@ body {
     display:inline-block;
 }
 
+.compost-info {
+    text-align: left;
+    margin: 30px;
+    font-size: 20px;
+}
+
+#compost-title, #how-to-compost {
+    text-align: center;
+    font: bold;
+}
 
 /* ------ Button formatting ------ */
 #button1, #button2, #button3, #button4, #classic, #extreme, #start-btn {
@@ -165,4 +177,3 @@ body {
     padding: 0px;
     font-size: 32px;
 }
-

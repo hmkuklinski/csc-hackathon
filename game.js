@@ -17,7 +17,7 @@ const button3 = document.querySelector("#button3"); //for the next button and Pl
 /* list of the game instructions!
  --> these will change once the user hits the previous/next buttons below the game window!
 */
-const gameInstructions = ["Hello! My name is Benji the Bunny!", "Kenny the Racoon knocked over this trashcan and I need your help to clean it up.", 
+const gameInstructions = ["Hello! My name is Benji the Bunny!", "Ruckus the Racoon knocked over this trashcan and I need your help to clean it up!", 
 "Some of these items are compostable, which means that we can use it to help grow new plants and trees!", 
 "This allows for a healthy environment full of nutritious food for every animal and human being around.", 
 "To get started, first move your mouse over one of the compostable items." ,
@@ -25,8 +25,8 @@ const gameInstructions = ["Hello! My name is Benji the Bunny!", "Kenny the Racoo
 "For every item you add to the trashcan, you get a point",
 "The timer will go for about 30 seconds. You want to get as much points as possible in that time period.",
 "I'll keep your score in the top corner for you to see. Be careful, though. If you miss an item, you might lose some points.", 
-"It is important to note that the trash will be moving in the game, but I've made them stationary for the tutorial.",
-"If you are ready to start the game, hit the Play Game button!"];
+"It is important to note that the compostables will be moving in the game, but I've made them stationary for the tutorial.",
+"If you are ready to start the game, hit the Select Game Mode button!"];
 
 /* our location in the gameInstructions arrayList */
 let currentGameInstructionIndex = 0;
@@ -266,8 +266,8 @@ function resetDraggedItems() {
     }
 }
 
-/*
-function randomizeDroppedItems() {
+
+/*function randomizeDroppedItems() {
     //first need to create an array list to select our compost elements
     let compostableItemsList = [];
     let divs = document.getElementsByTagName('div'); //will select all the div elements on the page
