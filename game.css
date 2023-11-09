@@ -181,3 +181,15 @@ body {
     padding: 0px;
     font-size: 32px;
 }
+.compost-images{
+    display:flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.compost-info{
+    margin:10px;
+    padding:10px;
+}
+.compost-images img{
+    border-radius:20px;
+}
