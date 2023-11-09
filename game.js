@@ -51,7 +51,7 @@ button2.addEventListener("click", (e) => {
     e.preventDefault();
     currentGameInstructionIndex =0; //sets the directions to the first item in the array
     updateInstruction();
-    resetScore(); //calls the resetScore function to update the score to zero
+    resetScore(0); //calls the resetScore function to update the score to zero
     
     //what buttons do we want displayed when we hit the reset button (for directions)
     button1.style.display="inline-block";
@@ -87,6 +87,7 @@ button3.addEventListener("click", (e) => {
 //select game mode --> tutorial, classic mode, expert mode
 button4.addEventListener("click", (e) => {
     e.preventDefault();
+    text.textContent="Select Game Mode";
     button1.style.display="none";
     button2.textContent="Tutorial"; //the reset button doubles as tutorial- goes back to first instructions and resets compost items
     button2.style.backgroundColor="purple"; 
@@ -103,6 +104,7 @@ let extremeModeSelected= false;
 let classicModeSelected=false;
 classic.addEventListener("click", (e)=>{
     classicModeSelected =true;
+    text.textContent= "Classic Mode Selected"
     button2.style.display="none";
     extreme.style.display="none";
     classic.style.display="none";
@@ -116,10 +118,16 @@ classic.addEventListener("click", (e)=>{
         let timeDuration =30;
         timerButtonClicked(timeDuration);
     });  
+    button4.addEventListener('click', (e) =>{
+        text.textContent= "Select Game Mode";
+        startButton.style.display="none";
+        button2.style.display="inline-block";
+    });
 });
 
 extreme.addEventListener("click", (e) =>{
     extremeModeSelected= true;
+    text.textContent= "Extreme Mode Selected";
     button2.style.display="none";
     extreme.style.display="none";
     classic.style.display="none";
@@ -166,14 +174,17 @@ function countdownClock(time){
                 resetScore(0);
                 classicModeSelected=false;
                 extremeModeSelected=false;
+                document.getElementById('timer').textContent= "Time: 30";
             });
             button4.style.display="inline-block";
             button4.addEventListener("click", (e) =>{
+                resetScore(0);
                 resetDraggedItems();
                 document.getElementById('text').textContent= "Select your Game Level"
                 classicModeSelected=false;
                 extremeModeSelected=false;
                 startButton.style.display="none";
+                document.getElementById('timer').textContent= "Time: 30";
             });
         } else {
             time--;
