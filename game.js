@@ -24,7 +24,7 @@ const gameInstructions = ["Hello! My name is Benji the Bunny!", "Ruckus the Raco
 "The timer will go for about 30 seconds. You want to get as much points as possible in that time period.",
 "I'll keep your score in the top corner for you to see. Be careful, though. If you miss an item, you might lose some points.", 
 "It is important to note that the compostables will be moving in the game, but I've made them stationary for the tutorial.",
-"If you are ready to start the game, hit the Select Game Mode button!"];
+"If you are ready to start the game, hit the next button and then the Select Game Mode button!"];
 
 /* our location in the gameInstructions arrayList */
 let currentGameInstructionIndex = 0;
