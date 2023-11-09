@@ -19,7 +19,7 @@ const gameInstructions = ["Hello! My name is Benji the Bunny!", "Ruckus the Raco
 "Some of these items are compostable, which means that we can use it to help grow new plants and trees!", 
 "This allows for a healthy environment full of nutritious food for every animal and human being around.", 
 "To get started, first move your mouse over one of the compostable items." ,
-"Click the mousepad/mouse and drag it over to the trashcan. Then let release it.",
+"Click the mousepad/mouse and drag it over to the trashcan. Then release it. ","Try it once and then hit the next button to continue",
 "For every item you add to the trashcan, you get a point",
 "The timer will go for about 30 seconds. You want to get as much points as possible in that time period.",
 "I'll keep your score in the top corner for you to see. Be careful, though. If you miss an item, you might lose some points.", 
