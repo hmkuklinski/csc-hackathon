@@ -162,8 +162,19 @@ function countdownClock(time){
                 timerButtonClicked(timeDuration);
             });
             button2.addEventListener("click", (e) =>{
+                resetDraggedItems();
                 resetScore(0);
-            })
+                classicModeSelected=false;
+                extremeModeSelected=false;
+            });
+            button4.style.display="inline-block";
+            button4.addEventListener("click", (e) =>{
+                resetDraggedItems();
+                document.getElementById('text').textContent= "Select your Game Level"
+                classicModeSelected=false;
+                extremeModeSelected=false;
+                startButton.style.display="none";
+            });
         } else {
             time--;
             document.getElementById('timer').textContent= "Time: " + time;
