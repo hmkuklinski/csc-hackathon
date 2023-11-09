@@ -147,9 +147,13 @@ body {
     font-size: 20px;
 }
 
-#compost-title, #how-to-compost {
+#compost-title, #how-to-compost, #more-info {
     text-align: center;
     font: bold;
+}
+
+#more-info {
+    font-size: 25px;
 }
 
 /* ------ Button formatting ------ */
