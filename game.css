@@ -197,3 +197,27 @@ body {
 .compost-images img{
     border-radius:20px;
 }
+.additional{
+    padding:10px;
+    border-radius:15px;
+    margin: 15px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+.additional ul li{
+    list-style-type: none;
+    margin: 15px 10px;
+}
+.additional a{
+    font-weight: 600;
+}
+.additional a:visited{
+    color:blue;
+}
+.additional p{
+    margin:0px;
+    padding:0px;
+}
