@@ -1,3 +1,7 @@
+@font-face{
+    font-family: 'Amsterdam';
+    src:url('https://www.fontspace.com/amsterdam-font-f29770')
+}
 body {
     display:flex;
     /*align-items:center;*/
@@ -16,23 +20,26 @@ body {
     width: 100%;
     margin: 10px;
 }
+#text{
+    font-family:"Amsterdam",sans-serif;
+}
 
 .top-text{
     display:block;
     padding: 20px;
     margin: 20px;
+    font-family:"Amsterdam",sans-serif;
 }
 .title h1{
     font-size: 40px;
     text-align:center;
-    font-weight: 600px;
+    font-weight:300;
+    color: #74b72e;;
     
 }
 .subtitle h2{
     font-weight: 300;
-}
-.title {
-    font:bold;
+    font-size:23px;
 }
 
 .game-window{
@@ -186,7 +193,7 @@ body {
 #text {
     margin: 20px;
     padding: 0px;
-    font-size: 32px;
+    font-size: 28px;
 }
 .compost-images{
     display:flex;
@@ -209,7 +216,7 @@ body {
     justify-content: center;
     width:100%;
     text-align: center;
-    background-color:#f2f2f2;
+    
 }
 .first-links, .second-links{
     width:50%;
