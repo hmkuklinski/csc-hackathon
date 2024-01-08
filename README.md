@@ -1,4 +1,4 @@
-# csc-hackathon
+# CompostABLE
 The goal of this project was to create a game that would help teach children about composting and how it can affect the environment.
 The project utilizes HTML, CSS, and JS to allow an interactive game with drag/drop elements. 
 
